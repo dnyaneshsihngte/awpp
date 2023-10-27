@@ -1,0 +1,55 @@
+DllDemo
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using MyMath;
+
+namespace DLLDemo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            MathOperations m = new MathOperations();
+            m.Add(10, 5);
+            m.Sub(10, 5);
+            m.Multi(10, 5);
+            m.Div(10, 5);
+            Console.ReadKey();
+        }
+    }
+}
+ MyMath
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MyMath
+{
+    public class MathOperations
+    {
+        public void Add(double a,double b)
+        {
+            Console.WriteLine("Addition of "+a+" and "+b+" is :"+(a+b));
+        }
+
+        public void Sub(double a, double b)
+        {
+            Console.WriteLine("Subtraction of " + a + " and " + b + " is :" + (a - b));
+        }
+        public void Multi(double a, double b)
+        {
+            Console.WriteLine("Multiplication of " + a + " and " + b + " is :" + (a * b));
+        }
+        public void Div(double a, double b)
+        {
+            Console.WriteLine("Division of " + a + " and " + b + " is :" + (a / b));
+        }
+
+
+    }
+}
