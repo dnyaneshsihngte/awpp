@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Registration Page</title>
+</head>
+<body>
+    <h1>Registration Page</h1>
+    <form id="form1" runat="server">
+        <div>
+          First Name:<asp:Label runat="server" Text="*" ForeColor="Red" Font-Size="15px"/>
+                    <asp:TextBox runat="server" ID="fname" /><br />
+                    <asp:RequiredFieldValidator runat="server"
+                        ControlToValidate="fname"
+                        ErrorMessage="Please Enter First Name"
+                        ForeColor="Brown"/><br />
+          Last Name:<asp:Label runat="server" Text="*" ForeColor="Red" Font-Size="15px"/>
+                    <asp:TextBox runat="server" ID="lname" /><br />
+                    <asp:RequiredFieldValidator runat="server"  
+                        ControlToValidate="lname"
+                        ErrorMessage="Please Enter Last Name"
+                        ForeColor="Brown"/><br />
+          Gender:<asp:RadioButton runat="server"
+              ID="male"
+              Text="Male"
+              AutoPostBack="True"
+              GroupName="Gender"
+              OnCheckedChanged="male_CheckedChanged"/>
+            <asp:RadioButton runat="server"
+              ID="female"
+              Text="Female"
+              AutoPostBack="True"
+              GroupName="Gender"
+              OnCheckedChanged="male_CheckedChanged"/> <br />
+           
+            DOB:<asp:Label runat="server" Text="*" ForeColor="Red" Font-Size="15px"/>
+                <asp:TextBox runat="server" ID="dob" TextMode="Date" /><br />
+                <asp:CompareValidator runat="server"
+                    ControlToValidate="dob"
+                    ValueToCompare="01/01/2004"
+                    Type="Date"
+                    Operator="LessThan"
+                    ErrorMessage="Your Age should be greater than 18"
+                    ForeColor="Brown" /><br />
+
+            Phone No:<asp:TextBox runat="server" ID="mobile" MaxLength="10" /><br />  
+            Email:<asp:Label runat="server" Text="*" ForeColor="Red" Font-Size="15px"/>
+                  <asp:TextBox runat="server" ID="email" TextMode="Email" /><br />
+                  <asp:RegularExpressionValidator runat="server" ID="Regular_Email"
+                      ErrorMessage="Invalid Email Expression!"
+                      ValidationExpression="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"
+                      ControlToValidate="email"
+                      ForeColor="Brown"/><br />
+
+            Address:<asp:TextBox runat="server" ID="address" TextMode="MultiLine"/><br />
+            Hobbies:<asp:CheckBox runat="server"
+                ID="chess"
+                Text="Chess"
+                AutoPostBack="True"
+                OnCheckedChanged="chess_CheckedChanged" />
+                <asp:CheckBox runat="server"
+                ID="cricket"
+                Text="Cricket"
+                AutoPostBack="True"
+                OnCheckedChanged="chess_CheckedChanged" />
+                <asp:CheckBox runat="server"
+                ID="singing"
+                Text="Singing"
+                AutoPostBack="True"
+                OnCheckedChanged="chess_CheckedChanged" /><br />
+            Country:<asp:Label runat="server" Text="*" ForeColor="Red" Font-Size="15px"/>
+                <asp:DropDownList runat="server" ID="country"  
+                    OnSelectedIndexChanged="country_SelectedIndexChanged" >
+                <asp:ListItem Text="" Value="" />
+                <asp:ListItem Text="India" Value="India" />
+                <asp:ListItem Text="Pakistan" Value="Pakistan" />
+                <asp:ListItem Text="Russia" Value="Russia" />
+                </asp:DropDownList><br />
+                <asp:RequiredFieldValidator runat="server"
+                    ErrorMessage="Please Select the Country "
+                    ControlToValidate="country"
+                    ForeColor="Brown"/><br />
+
+               
+ 
+
+
+
+
+          <asp:Button runat="server"
+              ID="submit"
+              Text="Submit"
+              OnClick="submit_Click" />
+          <asp:Button runat="server"
+              ID="reset"
+              Text="Reset"
+              OnClick="reset_Click" /><br/><br />
+           <asp:Label ID="flabel" runat="server" /><br />
+           <asp:Label ID="gender" runat="server" /><br />
+           <asp:Label ID="doblabel" runat="server" /><br />
+           <asp:Label ID="mobilelabel" runat="server" /><br />
+           <asp:Label ID="emaillabel" runat="server" /><br />
+           <asp:Label ID="addresslabel" runat="server" /><br />
+           <asp:Label ID="hobbylabel" runat="server" /><br />
+           <asp:Label ID="countrylabel" runat="server" /><br />
+        </div>
+    </form>
+</body>
+</html>
+
+Backend
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace WebApplication1
+{
+    public partial class Registration : System.Web.UI.Page
+    {
+       
+        protected void submit_Click(object sender, EventArgs e)
+        {
+            flabel.Text = "First name: " + fname.Text+" "+lname.Text;
+            doblabel.Text = "DOB: " + dob.Text;
+            mobilelabel.Text = "Phone No: " + mobile.Text;
+            emaillabel.Text = "Email: " + email.Text;
+            addresslabel.Text ="Address: " + address.Text;
+         
+
+        }
+
+        protected void reset_Click(object sender, EventArgs e)
+        {
+            flabel.Text = "";
+            doblabel.Text = "";
+            mobilelabel.Text = "";
+            emaillabel.Text = "";
+            addresslabel.Text = "";
+            gender.Text = "";
+            hobbylabel.Text = "";
+            countrylabel.Text = "";
+
+            fname.Text = "";
+            lname.Text = "";
+            dob.Text = "";
+            mobile.Text = "";
+            email.Text = "";
+            address.Text = "";
+            chess.Checked = false;
+            cricket.Checked = false;
+            singing.Checked = false;
+            male.Checked = false;
+            female.Checked = false;
+            country.SelectedIndex = -1;
+        }
+
+        protected void male_CheckedChanged(object sender, EventArgs e)
+        {
+            String msg = "Gender:  ";
+
+            if (male.Checked)
+            {
+                gender.Text = msg + male.Text;
+            }
+            if (female.Checked)
+            {
+                gender.Text = msg + female.Text;
+            }
+        }
+
+        protected void chess_CheckedChanged(object sender, EventArgs e)
+        {
+            String msg1 = "Hobbies:",msg="";
+
+            if (chess.Checked)
+            {
+                msg += " "+chess.Text;
+            }
+            if (cricket.Checked)
+            {
+                msg += " "+cricket.Text;
+            }
+            if (singing.Checked)
+            {
+                msg += " "+singing.Text;
+            }
+            hobbylabel.Text = msg1 + msg;
+        }
+
+        protected void country_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            String msg1 = "Country: ";
+            if (country.SelectedValue == "India")
+            {
+                countrylabel.Text = msg1 + country.Text;
+            }
+            if (country.SelectedValue == "Pakistan")
+            {
+                countrylabel.Text = msg1 + country.Text;
+            }
+            if (country.SelectedValue == "Russia")
+            {
+                countrylabel.Text = msg1 + country.Text;
+            }
+
+        }        
+    }
+}
