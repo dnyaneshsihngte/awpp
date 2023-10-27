@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:AdRotator ID="AdRotator1"  runat="server" DataSourceID="XmlDataSource1" Height="300" Width="400" />
+            <asp:XmlDataSource ID="XmlDataSource1" runat="server" DataFile="~/AdRotator.xml" ></asp:XmlDataSource>
+        </div>
+    </form>
+</body>
+</html>
+
+
+
+.XML
+
+<?xml version="1.0" encoding="utf-8" ?>
+<Advertisements>
+  <Ad>
+      <ImageUrl>SpiderMan.jpg</ImageUrl>
+      <NavigateUrl>https://simple.wikipedia.org/wiki/Spider-Man</NavigateUrl>
+      <AlternateText>Spider Man</AlternateText>
+  </Ad>
+  <Ad>
+    <ImageUrl>JohnWick.jpg</ImageUrl>
+      <NavigateUrl>https://en.wikipedia.org/wiki/John_Wick_(character)#:~:text=John%20became%20the%20top%20enforcer,with%20a%20woman%20named%20Helen.</NavigateUrl>
+      <AlternateText>John Wick</AlternateText>
+    </Ad>
+  <Ad>
+    <ImageUrl>Jawan.jpg</ImageUrl>
+      <NavigateUrl>https://en.wikipedia.org/wiki/Spider-Man</NavigateUrl>
+      <AlternateText>Jawan</AlternateText>
+    </Ad>
+</Advertisements>
