@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:Calendar ID="Cal" runat="server" OnSelectionChanged="C1" 
+                Caption="TYIT" NextMonthText="Oct"
+                PrevMonthText="Aug" TitleFormat="Month"
+                DayHeaderStyle-BackColor="#6666ff" DayHeaderStyle-BorderStyle="Solid" DayStyle-BackColor="#ff9900"  DayNameFormat="Shortest" OtherMonthDayStyle-BackColor="#999966" CellSpacing="1" onDayRender="Cal_DayRender"><SelectedDayStyle backcolor="Red" /></asp:Calendar><br />
+            <asp:Label ID="date" runat="server" Text="Lab"></asp:Label><br />
+            <asp:Label ID="Curr" runat="server" Text="current"></asp:Label><br />
+            <asp:Label ID="Gvac" runat="server" Text="Label"></asp:Label><br />
+            <asp:Label ID="daysLeft" runat="server" Text="Days left"></asp:Label>
+        </div>
+    </form>
+</body>
+</html>
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace _3b
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void C1(object sender, EventArgs e)
+        {
+            String st= Cal.SelectedDate.Date.ToString("dd MMM yyyy");
+            date.Text = "Your Selected Date:" + st;
+            Curr.Text = "Todays Date:" + DateTime.Today.ToString("dd MMM yyyy");
+            DateTime dt = new DateTime(2023, 09, 19);
+            String s=dt.ToString("dd MMM yyyy");
+            Gvac.Text = "Ganpati Vacation" + s;
+            daysLeft.Text = "Days Left For Vacation:"+(dt - DateTime.Today).Days;
+           // daysLeft.Text = "Days Left For Vacation:" + (dt - Cal.SelectedDate.Date).Days;
+        }
+
+        protected void Cal_DayRender(object sender, DayRenderEventArgs e)
+        {
+            if ((e.Day.Date.Day == 5) && (e.Day.Date.Month == 9))
+            {
+                Image i = new Image();
+                i.ImageUrl = "TeacherDay.jpg";
+                i.Height = 20;
+                i.Width = 20;
+                e.Cell.Controls.Add(i);
+                Label L1 = new Label();
+                L1.Text = "<br>Teacher's Day";
+                e.Cell.Controls.Add(L1);
+                e.Cell.BackColor = System.Drawing.Color.Yellow;
+            }
+            if (e.Day.Date.Day == 19 && e.Day.Date.Month == 9)
+            {
+                Cal.SelectedDate = new DateTime(2023, 9, 18);
+                Cal.SelectedDates.SelectRange(Cal.SelectedDate, Cal.SelectedDate.AddDays(10));
+                Label l2 = new Label();
+                l2.Text = "<br>Ganpati";
+                e.Cell.Controls.Add(l2);
+            }
+        
+            
+        }
+    }
+}
