@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server" >
+        <div>
+            <asp:Button runat="server" ID="Read_btn" Text="Read XML" OnClick="Read_btn_Click"/><br/>
+            <asp:Label runat="server" ID="l1" /><br />
+            <asp:Button runat="server" ID="Write_btn" Text="Write XML" OnClick="Write_btn_Click" /><br />
+            <asp:TextBox runat="server" ID="t1" /><br />
+        </div>
+    </form>
+</body>
+</html>
+
+backend
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Xml;
+namespace XmlDemo
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Read_btn_Click(object sender, EventArgs e)
+        {
+            XmlReader rd = XmlReader.Create(@"D:\Sourav Awp\Xml\XmlDemo.xml");
+            while(rd.Read())
+            {
+                if(rd.NodeType.Equals(XmlNodeType.Element))
+                {
+                    l1.Text += "<br/>" + l1.Text + rd.Name;
+                }
+            }
+            rd.Close();
+
+        }
+
+        protected void Write_btn_Click(object sender, EventArgs e)
+        {
+            XmlWriterSettings set = new XmlWriterSettings();
+            set.Indent = true;
+            XmlWriter wr = XmlWriter.Create(@"D:\Sourav Awp\Xml\XmlDemo.xml", set);
+            wr.WriteStartDocument();
+            wr.WriteComment("Example of Xml Document");
+            wr.WriteStartElement(t1.Text);
+            wr.WriteEndElement();
+            wr.WriteEndDocument();
+            wr.Flush();
+            wr.Close();
+        }
+    }
+}
