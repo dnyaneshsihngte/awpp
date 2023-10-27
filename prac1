@@ -1,0 +1,21 @@
+using System;
+
+namespace Practical1A
+{
+    class P1A
+    {
+        static void Main()
+        {
+            int no1, no2, no3,no4,product;
+            Console.WriteLine("Enter Four No : ");
+            no1 = Convert.ToInt32(Console.ReadLine());
+            no2 = Convert.ToInt32(Console.ReadLine());
+            no3 = Convert.ToInt32(Console.ReadLine());
+            no4 = Convert.ToInt32(Console.ReadLine());
+            product = no1 * no2 * no3 * no4;
+            Console.WriteLine("product of Given No = " + product);
+
+
+        }
+    }
+}
